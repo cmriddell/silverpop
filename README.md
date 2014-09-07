@@ -1,8 +1,8 @@
 # SilverPop API
 A Ruby wrapper for the SilverPop API
 
-[![Build Status](https://secure.travis-ci.org/upworthy/silverpop.png?branch=master)][travis]
-[travis]: http://travis-ci.org/upworthy/silverpop
+[![Build Status](https://secure.travis-ci.org/cmriddell/silverpop.png?branch=master)][travis]
+[travis]: http://travis-ci.org/cmriddell/silverpop
 
 ## Installation
 
