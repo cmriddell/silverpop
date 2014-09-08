@@ -29,6 +29,33 @@ module SilverPop
         post(xml)
       end
 
+      # GetAggregateTrackingForOrg - This interface extracts a listing of mailings sent for an organization for a specified date range and provides metrics for those mailings.
+      #
+      # @param date_start [String]  Starting Date in the format “mm/dd/yyyy hh:mm:ss”
+      # @param date_end [String] Required Ending Date in the format “mm/dd/yyyy hh:mm:ss”
+      # @param options [Hash] Optional parameters to send
+      # @return [Mash] Mashify body from the API call
+      # @example Get aggregate tracking for organization for 1/1/2014 to 1/2/2014
+      #   s = SilverPop.new({access_token: "abc123", url: "https://api1.silverpop.com"})
+      #   s.get_aggregate_tracking_for_org("1/1/2014", "1/2/2014)
+      def get_aggregate_tracking_for_org(date_start, date_end, options={})
+        builder = Builder::XmlMarkup.new
+        xml = builder.Envelope {
+          builder.Body {
+            builder.GetAggregateTrackingForOrg {
+              unless options.empty?
+                options.each do |o|
+                    builder.tag! o[0], o[1]
+                end
+              end
+              builder.DATE_START date_start
+              builder.DATE_END date_end
+              }
+            }
+          }
+        post(xml)
+      end
+
       # RawRecipientDataExport - Allows exporting unique contact-level events and creates a .zip file containing a single flat file with all metrics
       #
       # @param query_params [Hash] The list of fields to run the query against MAILING_ID, REPORT_ID, etc.
