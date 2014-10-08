@@ -10,7 +10,7 @@ module SilverPop
       # @return [Mash] Mashify body from the API call
       # @example Get sent mailing for organization for 1/1/2014 to 1/2/2014
       #   s = SilverPop.new({access_token: "abc123", url: "https://api1.silverpop.com"})
-      #   s.get_sent_mailings_for_org("1/1/2014", "1/2/2014)
+      #   s.get_sent_mailings_for_org("01/01/2014 00:00:00", "01/02/2014 00:00:00")
       def get_sent_mailings_for_org(date_start, date_end, options={})
         builder = Builder::XmlMarkup.new
         xml = builder.Envelope {
