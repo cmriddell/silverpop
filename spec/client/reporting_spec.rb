@@ -45,6 +45,15 @@ describe SilverPop::Client::Reporting do
       resp.Envelope.Body.RESULT.Mailing[0].MailingId.should eql "21397697"
     end
 
+    it "returns the mailingId for the given dates as Dates" do
+      stub_post("/XMLAPI?access_token=abc123").
+        with(:body => "<Envelope><Body><GetAggregateTrackingForOrg><DATE_START>01/01/2014 00:00:00</DATE_START><DATE_END>01/02/2014 00:00:00</DATE_END></GetAggregateTrackingForOrg></Body></Envelope>").
+        to_return(:status => 200, :body => fixture('aggregate_tracking_org.xml'), :headers => {'Content-type' => "text/xml"})
+
+      resp = @client.get_aggregate_tracking_for_org(Date.new(2014, 1, 1), Date.new(2014, 1, 2))
+      resp.Envelope.Body.RESULT.Mailing[0].MailingId.should eql "21397697"
+    end
+
     it "returns the mailingId for the given dates when passing an option" do
       stub_post("/XMLAPI?access_token=abc123").
         with(:body => "<Envelope><Body><GetAggregateTrackingForOrg><TOP_DOMAIN/><DATE_START>01/01/2014 00:00:00</DATE_START><DATE_END>01/02/2014 23:59:59</DATE_END></GetAggregateTrackingForOrg></Body></Envelope>").

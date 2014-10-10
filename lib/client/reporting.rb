@@ -48,6 +48,9 @@ module SilverPop
                     builder.tag! o[0], o[1]
                 end
               end
+              format = '%m/%d/%Y %H:%M:%S'
+              date_start = date_start.strftime(format) if date_start.respond_to? :strftime
+              date_end = date_end.strftime(format) if date_end.respond_to? :strftime
               builder.DATE_START date_start
               builder.DATE_END date_end
               }
